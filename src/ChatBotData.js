@@ -1,14 +1,14 @@
 export const ChatData = [
   {
-    message: "Hello",
+    question: "Hello",
     answer: "Hello Nice to meet you",
   },
   {
-    message: "HI",
+    question: "HI",
     answer: "hi Nice to meet you",
   },
   {
-    message: "what is the time ?",
-    answer: "4 pm",
+    question: "what is the time ?",
+    answer: new Date().toString(),
   },
 ];

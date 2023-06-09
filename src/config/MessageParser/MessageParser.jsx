@@ -3,22 +3,28 @@ import { ChatData } from "../../ChatBotData.js";
 
 const MessageParser = ({ children, actions }) => {
   const parse = (message) => {
-    ChatData.map((data) => {
-      if (data.message.toLowerCase().includes(message)) {
-        actions.handleMessage(data.answer);
-      }
-    });
+    if (message.length > 0) {
+      ChatData.filter((data) =>
+        data.question.toLowerCase().includes(message.toLowerCase())
+      ).length > 0
+        ? ChatData.filter((data) =>
+            data.question.toLowerCase().includes(message.toLowerCase())
+          ).map((data) => actions.handleMessage(data.answer))
+        : actions.handleMessage("Sorry , My Dataset can't answer your QU.");
+    } else {
+      actions.handleMessage("Sorry , My Dataset can't answer your QU. ");
+    }
   };
 
   return (
-    <div>
+    <React.Fragment>
       {React.Children.map(children, (child) => {
         return React.cloneElement(child, {
           parse: parse,
           actions,
         });
       })}
-    </div>
+    </React.Fragment>
   );
 };
 

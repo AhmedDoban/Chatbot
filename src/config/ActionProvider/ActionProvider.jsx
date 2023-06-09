@@ -3,7 +3,6 @@ import React from "react";
 const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   const handleMessage = (message) => {
     const botMessage = createChatBotMessage(message);
-
     setState((prev) => ({
       ...prev,
       messages: [...prev.messages, botMessage],
@@ -11,7 +10,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   };
 
   return (
-    <div>
+    <React.Fragment>
       {React.Children.map(children, (child) => {
         return React.cloneElement(child, {
           actions: {
@@ -19,7 +18,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
           },
         });
       })}
-    </div>
+    </React.Fragment>
   );
 };
 
